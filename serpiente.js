@@ -11,6 +11,14 @@ function serpiente(){
         this.moverY = y;
     }
 
+    this.comer = function(posicion){
+        var d = dist(this.posicionx, this.posiciony, posicion.x ,posicion.y);
+        if(d < 1 ){
+            return true;
+        }else {
+            return false;
+        }
+    }
     this.actualizar = function(){
         this.posicionx = this.posicionx + this.moverX * escala;
         this.posiciony = this.posiciony + this.moverY * escala;

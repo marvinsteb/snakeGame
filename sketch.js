@@ -4,16 +4,31 @@ var comida;
 function setup() {
     createCanvas(600,600);
     nuevaSerpiente = new serpiente();    
-    comida = createVector(random(width),random(height));
+    frameRate(10);
+    colocarComida();
+}
+
+function colocarComida(){
+    var columna = floor(width/escala);
+    var fila = floor(height/escala);
+    comida = createVector(floor(random(columna)),floor(random(fila)));
+    comida.mult(escala);
 }
 
 function draw() {
     background(51);
     nuevaSerpiente.actualizar();
     nuevaSerpiente.mostrar();
+    
+    if(nuevaSerpiente.comer(comida)){
+        colocarComida();
+    };
+    
 
     fill(255, 0 ,100);
-    rect(comida.x,comida.y,escala,escala)
+    rect(comida.x,comida.y,escala,escala);
+
+    
 }
 
 function keyPressed() {
