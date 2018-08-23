@@ -4,9 +4,10 @@ function serpiente(){
     this.posiciony = 0;
     this.moverX = 1;
     this.moverY = 0;
+    this.tamanio = 0;
+    this.cola = [];
 
     this.moverSerpiente = function(x,y){
-        console.log("moviendo en en x " + x + " en y " + y )
         this.moverX = x;
         this.moverY = y;
     }
@@ -14,12 +15,22 @@ function serpiente(){
     this.comer = function(posicion){
         var d = dist(this.posicionx, this.posiciony, posicion.x ,posicion.y);
         if(d < 1 ){
+            this.tamanio++;     
             return true;
         }else {
             return false;
         }
     }
     this.actualizar = function(){
+
+        if(this.tamanio === this.cola.length){
+
+            for (var i = 0; i < this.cola.length - 1 ; i++) {
+                this.cola[i] = this.cola[i + 1];
+            }
+        }
+        this.cola[this.tamanio - 1] = createVector(this.posicionx, this.posiciony);
+
         this.posicionx = this.posicionx + this.moverX * escala;
         this.posiciony = this.posiciony + this.moverY * escala;
 
@@ -28,7 +39,10 @@ function serpiente(){
     }
     this.mostrar = function(){
         fill(255);
+        for (var i = 0; i < this.cola.length  ; i++) {
+            console.log("dibujando la cola");
+            rect(this.cola[i].x,this.cola[i].y,escala,escala);
+        }
         rect(this.posicionx,this.posiciony,escala,escala);
     }
-
 }
