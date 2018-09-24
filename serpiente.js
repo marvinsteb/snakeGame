@@ -17,6 +17,9 @@ function serpiente(){
                 alert("estas muerto");
                 this.tamanio = 0;
                 this.cola = []; 
+                return true;
+            }else {
+                return false;
             }
         }
     }

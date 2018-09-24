@@ -2,12 +2,14 @@ var nuevaSerpiente;
 var escala = 20;
 var comida;
 function setup() {
+    iniciarJuego();
+}
+function iniciarJuego(){
     createCanvas(600,600);
     nuevaSerpiente = new serpiente();    
-    frameRate(5);
+    frameRate(10);
     colocarComida();
 }
-
 function colocarComida(){
     var columna = floor(width/escala);
     var fila = floor(height/escala);
@@ -19,11 +21,12 @@ function draw() {
     background(51);
     nuevaSerpiente.actualizar();
     nuevaSerpiente.mostrar();
-    nuevaSerpiente.muere();
+    if(nuevaSerpiente.muere()){
+        iniciarJuego();
+    }
     if(nuevaSerpiente.comer(comida)){
         colocarComida();
-        frameRate(10);
-    };
+    }
     
 
     fill(255, 0 ,100);
